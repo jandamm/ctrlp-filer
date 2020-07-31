@@ -58,7 +58,7 @@ function! ctrlp#filer#accept(mode, str) abort
 	call ctrlp#exit()
 	let path = s:to_p(a:str)
 	if isdirectory(path)
-		silent! call feedkeys(':CtrlPFiler ' . path . "\n", 'nt')
+		silent! execute 'CtrlPFiler '.path
 	else
 		call ctrlp#acceptfile(a:mode, path)
 	endif
