@@ -51,7 +51,12 @@ function! ctrlp#filer#init(...) abort
 		silent! exe 'lcd' s:path
 	endif
 	call ctrlp#init(ctrlp#filer#id())
-	return map(['..'] + split(glob(s:path . '/*'), "\n"), 'fnamemodify(v:val, ":t") . (isdirectory(v:val) ? "/" : "")')
+	if get(g:, 'ctrlp_filer_show_hidden', 0)
+		let hidden = split(glob(s:path . '/.[^.]*'), '\n')
+	else
+		let hidden = []
+	endif
+	return map(['..'] + hidden + split(glob(s:path . '/*'), '\n'), 'fnamemodify(v:val, ":t") . (isdirectory(v:val) ? "/" : "")')
 endfunction
 
 function! ctrlp#filer#accept(mode, str) abort
