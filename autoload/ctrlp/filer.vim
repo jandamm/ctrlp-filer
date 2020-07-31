@@ -60,7 +60,7 @@ function! ctrlp#filer#accept(mode, str)
   if isdirectory(path)
     silent! call feedkeys(":CtrlPFiler " . path . "\n", "nt")
   else
-    call ctrlp#acceptfile('', path)
+    call ctrlp#acceptfile(a:mode, path)
   endif
 endfunction
 
